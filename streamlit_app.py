@@ -117,7 +117,7 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 # Streamlit file uploader
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
-st.text_input(
+token = st.text_input(
         "Placeholder for the other text input widget",
         "This is a placeholder",
         key="placeholder",
