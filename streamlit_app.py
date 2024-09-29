@@ -6,7 +6,7 @@ from datetime import datetime
 import streamlit_authenticator as stauth
 
 names = st.secrets["credentials"]["names"]
-usernames st.secrets["credentials"]["usernames"]
+usernames = st.secrets["credentials"]["usernames"]
 
 hashed_passwords = stauth.Hasher(st.secrets["credentials"]["passwords"]).generate()
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
