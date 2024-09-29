@@ -26,12 +26,10 @@ def run_query(query):
     rows = [dict(row) for row in rows_raw]
     return rows
 
-rows = run_query("select * from `bonnier-deliverables.vertexAI_search.token_table`")
+token = run_query("select * from `bonnier-deliverables.vertexAI_search.token_table`")
 
 # Print results.
-st.write("Some wise words from Shakespeare:")
-for row in rows:
-    st.write("✍️ " + row['token'])
+st.write({token})
 
 
 def check_password():
