@@ -124,7 +124,7 @@ token = st.text_input(
         )
 
 #token = token_result["token"]  # Replace "token_column_name" with the actual column name you need
-st.write({token_result})
+st.write(str({token_result}))
 # File name in cloud storage
 
 if uploaded_file:
