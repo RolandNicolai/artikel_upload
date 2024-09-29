@@ -10,12 +10,19 @@ names = st.secrets["credentials"]["names"]
 usernames = st.secrets["credentials"]["usernames"]
 passwords = st.secrets["credentials"]["passwords"]
 
-# Hash the passwords (they should already be hashed, but you can hash them if needed)
+# Hash the passwords (if they are not already hashed)
 hashed_passwords = stauth.Hasher(passwords).generate()
 
 # Access the cookie name and signature key from secrets
 cookie_name = st.secrets["auth"]["cookie_name"]
 signature_key = st.secrets["auth"]["signature_key"]
+
+# Check if all required values are present and correct
+st.write(f"Names: {names}")
+st.write(f"Usernames: {usernames}")
+st.write(f"Hashed Passwords: {hashed_passwords}")
+st.write(f"Cookie Name: {cookie_name}")
+st.write(f"Signature Key: {signature_key}")
 
 # Create the authenticator
 authenticator = stauth.Authenticate(
@@ -39,6 +46,8 @@ elif authentication_status == False:
     st.error("Username/password is incorrect")
 elif authentication_status == None:
     st.warning("Please enter your username and password")
+
+
 
 LOGO_URL_LARGE = "https://bonnierpublications.com/app/themes/bonnierpublications/assets/img/logo.svg"
 st.logo(LOGO_URL_LARGE)
