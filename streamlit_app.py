@@ -97,8 +97,8 @@ uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 # File name in cloud storage
 destination_blob_name = str(uploaded_file.name)
 
-st.write({destination_blob_name})
-
+if uploaded_file:
+   st.write("Filename: ", uploaded_file.name)
 # Handle file upload when button is clicked
 if st.button("Upload fil"):
     if uploaded_file is not None:
