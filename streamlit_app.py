@@ -26,7 +26,7 @@ def run_query(query):
     rows = [dict(row) for row in rows_raw]
     return rows
 
-token = run_query("select * from `bonnier-deliverables.vertexAI_search.token_table`")
+token_result = run_query("select * from `bonnier-deliverables.vertexAI_search.token_table`")
 
 
 
@@ -123,6 +123,8 @@ token = st.text_input(
         key="placeholder",
         )
 
+token = token_result["token"]  # Replace "token_column_name" with the actual column name you need
+st.write(token)
 # File name in cloud storage
 
 if uploaded_file:
