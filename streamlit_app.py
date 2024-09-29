@@ -89,7 +89,7 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
     # Upload the file directly from the file-like object
     blob.upload_from_file(file_obj, content_type="application/pdf")
     
-    st.write(f"File uploaded to {bucket_name}/{destination_blob_name}.")
+    st.write(f"Fil blev uploadet: {bucket_name}/{destination_blob_name}.")
 
 # Streamlit file uploader
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
@@ -99,12 +99,12 @@ uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 # File name in cloud storage
 
 if uploaded_file:
-   st.write("Filename: ", uploaded_file.name)
+   st.write("Navn på fil: ", uploaded_file.name)
 # Handle file upload when button is clicked
 if st.button("Upload fil"):
     if uploaded_file is not None:
         # Call the upload_blob function with the file object
         upload_blob("vertex_search_assets", uploaded_file, destination_blob_name)
     else:
-        st.error("No file uploaded. Please upload a PDF file.")
+        st.error("Ingen fil valgt, vælg venligst en fil.")
 
