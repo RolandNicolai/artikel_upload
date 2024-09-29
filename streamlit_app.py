@@ -15,17 +15,6 @@ with left:
     if google_button:
         st.experimental_user.login(provider="google")
 
-with middle:
-    auth_zero_login = st.button("Auth0 Login")
-    if auth_zero_login:
-        st.experimental_user.login(provider="auth0")
-
-with right:
-    microsoft_login = st.button("Microsoft Login")
-
-    if microsoft_login:
-        st.experimental_user.login(provider="microsoft")
-
 
 st.write(":sparkles: :rainbow[User data]")
 st.write(st.experimental_user)
