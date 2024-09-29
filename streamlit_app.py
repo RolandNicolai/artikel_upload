@@ -58,8 +58,10 @@ current_hour = current_time_copenhagen.hour
 
 email = st.experimental_user.email
 
-first_name = email.split(".")[0]
-
+if email and isinstance(email, str):
+    first_name = email.split(".")[0]
+else:
+    first_name = ""
 # Conditional statements based on the time of the day
 if 6 <= current_hour < 10:
     st.title(":orange[Godmorgen] " + first_name.capitalize())
