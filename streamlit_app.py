@@ -10,6 +10,9 @@ names = st.secrets["credentials"]["names"]
 usernames = st.secrets["credentials"]["usernames"]
 passwords = st.secrets["credentials"]["passwords"]
 
+cookie_name = st.secrets["credentials"]["cookie_name"]
+signature_key = st.secrets["credentials"]["signature_key"]
+
 # Hash the passwords
 hashed_passwords = stauth.Hasher(passwords).generate()
 
@@ -18,8 +21,8 @@ authenticator = stauth.Authenticate(
     names, 
     usernames, 
     hashed_passwords, 
-    'some_cookie_name', 
-    'some_signature_key', 
+    cookie_name, 
+    signature_key, 
     cookie_expiry_days=30
 )
 
