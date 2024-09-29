@@ -5,9 +5,6 @@ import pytz
 from datetime import datetime
 import streamlit_authenticator as stauth
 
-names = st.secrets.get("names", [])  # Default to an empty list if "names" is not found
-usernames = st.secrets.get("usernames", [])
-passwords = st.secrets.get("passwords", [])
 
 hashed_passwords = stauth.Hasher(st.secrets("passwords")).generate()
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
