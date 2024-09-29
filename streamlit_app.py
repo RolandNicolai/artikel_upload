@@ -4,53 +4,31 @@ import time
 import pytz
 from datetime import datetime
 import streamlit_authenticator as stauth
+import yaml
 
-# Generate a secure random key
+hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
+from yaml.loader import SafeLoader
+with open('../config.yaml') as file:
+    config = yaml.load(file, Loader=SafeLoader)
 
-
-# Load credentials from the Streamlit secrets
-names = st.secrets["credentials"]["names"]
-usernames = st.secrets["credentials"]["usernames"]
-passwords = st.secrets["credentials"]["passwords"]
-
-# Hash the passwords (if they are not already hashed)
-hashed_passwords = stauth.Hasher(passwords).generate()
-
-# Access the cookie name and signature key from secrets
-cookie_name = st.secrets["auth"]["cookie_name"]
-signature_key = st.secrets["auth"]["signature_key"]
-
-# Check if all required values are present and correct
-st.write(f"Names: {names}")
-st.write(f"Usernames: {usernames}")
-st.write(f"Hashed Passwords: {hashed_passwords}")
-st.write(f"Cookie Name: {cookie_name}")
-st.write(f"Signature Key: {signature_key}")
-
-# Create the authenticator
-authenticator = stauth.Authenticate(
-    names,
-    usernames,
-    hashed_passwords,
-    cookie_name,
-    signature_key,
-    cookie_expiry_days=30
+authenticator = Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days'],
+    config['preauthorized']
 )
 
-# Login method
-name, authentication_status, username = authenticator.login("Login", "main")
+name, authentication_status, username = authenticator.login('Login', 'main')
 
-# Handle login status
 if authentication_status:
-    authenticator.logout("Logout", "main")
-    st.write(f"Welcome *{name}*")
-    st.title("Some protected content")
+    authenticator.logout('Logout', 'main')
+    st.write(f'Welcome *{name}*')
+    st.title('Some content')
 elif authentication_status == False:
-    st.error("Username/password is incorrect")
+    st.error('Username/password is incorrect')
 elif authentication_status == None:
-    st.warning("Please enter your username and password")
-
-
+    st.warning('Please enter your username and password')
 
 LOGO_URL_LARGE = "https://bonnierpublications.com/app/themes/bonnierpublications/assets/img/logo.svg"
 st.logo(LOGO_URL_LARGE)
