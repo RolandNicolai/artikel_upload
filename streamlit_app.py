@@ -117,7 +117,7 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 # Streamlit file uploader
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
-token = st.text_input("Movie title", "Life of Brian")
+token = st.text_input()
 
 
 # File name in cloud storage
