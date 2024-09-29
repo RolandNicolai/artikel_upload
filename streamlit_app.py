@@ -4,6 +4,11 @@ import time
 import pytz
 from datetime import datetime
 import streamlit_authenticator as stauth
+import secrets
+
+# Generate a secure random key
+signature = secrets.token_hex(32)
+st.write({signature})
 
 # Load credentials from the Streamlit secrets
 names = st.secrets["credentials"]["names"]
