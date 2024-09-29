@@ -95,7 +95,6 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 
 # File name in cloud storage
-destination_blob_name = str(uploaded_file.name)
 
 if uploaded_file:
    st.write("Filename: ", uploaded_file.name)
