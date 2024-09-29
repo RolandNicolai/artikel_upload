@@ -28,7 +28,7 @@ st.write(f"Cookie Name: {cookie_name}")
 st.write(f"Signature Key: {signature_key}")
 
 # Create the authenticator
-authenticator = stauth.Authenticate(names, usernames, hashed_passwords, cookie_name, signature_key, cookie_expiry_days=30)
+authenticator = stauth.Authenticate(st.secrets["credentials"]["names"], st.secrets["credentials"]["usernames"], hashed_passwords, st.secrets["auth"]["cookie_name"], st.secrets["auth"]["signature_key"], cookie_expiry_days=30)
 
 
 # Login method
