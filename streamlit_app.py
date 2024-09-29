@@ -28,8 +28,6 @@ def run_query(query):
 
 token = run_query("select * from `bonnier-deliverables.vertexAI_search.token_table`")
 
-# Print results.
-st.write({token})
 
 
 def check_password():
@@ -119,6 +117,7 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 # Streamlit file uploader
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
+access_token = st.input()
 
 
 # File name in cloud storage
@@ -128,7 +127,7 @@ if uploaded_file:
    #st.write("Navn på fil: ", uploaded_file.name);
 # Handle file upload when button is clicked
 if st.button("Upload fil"):
-    if uploaded_file is not None:
+    if access_token == rows["token"]:
         # Call the upload_blob function with the file object
         upload_blob("vertex_search_assets", uploaded_file, destination_blob_name)
     else:
