@@ -9,7 +9,7 @@ names = st.secrets.get("names", [])  # Default to an empty list if "names" is no
 usernames = st.secrets.get("usernames", [])
 passwords = st.secrets.get("passwords", [])
 
-hashed_passwords = stauth.Hasher(passwords).generate()
+hashed_passwords = stauth.Hasher(st.secrets("passwords").generate()
 authenticator = stauth.Authenticate(names, usernames, hashed_passwords,
     'some_cookie_name', 'some_signature_key', cookie_expiry_days=30)
 
