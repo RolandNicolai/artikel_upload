@@ -92,7 +92,10 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
     st.write(f"File uploaded to {bucket_name}/{destination_blob_name}.")
 
 # Streamlit file uploader
-uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
+uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
+
+title = st.text_input({uploaded_file})
+st.write("The current movie title is", title)
 
 # File name in cloud storage
 
