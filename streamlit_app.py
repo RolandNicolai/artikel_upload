@@ -1,6 +1,12 @@
 import streamlit as st
 import hmac
+import streamlit as st
+import time
+import pytz
+from datetime import datetime
 
+LOGO_URL_LARGE = "https://bonnierpublications.com/app/themes/bonnierpublications/assets/img/logo.svg"
+st.logo(LOGO_URL_LARGE)
 def check_password():
     """Returns `True` if the user had a correct password."""
 
@@ -39,6 +45,28 @@ if not check_password():
     st.stop()
 
 
-st.write("Hello")
 
+
+# Define the Copenhagen timezone
+copenhagen_tz = pytz.timezone('Europe/Copenhagen')
+
+# Get the current time in Copenhagen
+current_time_copenhagen = datetime.now(pytz.utc).astimezone(copenhagen_tz)
+
+# Extract the hour part as an integer
+current_hour = current_time_copenhagen.hour
+
+email = st.experimental_user.email
+
+first_name = email.split(".")[0]
+
+# Conditional statements based on the time of the day
+if 6 <= current_hour < 10:
+    st.title(":orange[Godmorgen] " + first_name.capitalize())
+elif 10<= current_hour < 12:
+    st.title(":orange[God formiddag] " + first_name.capitalize())
+elif 12 <= current_hour < 18:
+    st.title(":orange[God eftermiddag] " + first_name.capitalize())
+else:
+    st.title(":orange[Godaften] " + first_name.capitalize())
 # Main Streamlit app starts here
