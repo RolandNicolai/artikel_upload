@@ -126,6 +126,9 @@ token_input = st.text_input(
 #token = token_result["token"]  # Replace "token_column_name" with the actual column name you need
 token_validation = token_result[0].get("token")  # Safely get the token if present
 #st.write(token_1)# File name in cloud storage
+url = "https://lookerstudio.google.com/reporting/3c89f773-ad20-4558-b4f3-87249413c0f7"
+st.write("Hent token[link](%s)" % url)
+st.markdown("Hent token [link](%s)" % url)
 
 if uploaded_file:
     destination_blob_name = uploaded_file.name
@@ -137,3 +140,4 @@ if st.button("Upload fil"):
         upload_blob("vertex_search_assets", uploaded_file, destination_blob_name)
     else:
         st.error("Ingen fil valgt, vælg venligst en fil.")
+
