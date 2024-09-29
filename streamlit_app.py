@@ -21,8 +21,8 @@ authenticator = stauth.Authenticate(
     names, 
     usernames, 
     hashed_passwords, 
-    cookie_name, 
-    signature_key, 
+    'cookie_name', 
+    'signature_key', 
     cookie_expiry_days=30
 )
 
