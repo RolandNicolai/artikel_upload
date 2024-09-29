@@ -17,9 +17,7 @@ authenticator = Authenticate(
     config['cookie']['name'],
     config['cookie']['key'],
     config['cookie']['expiry_days'],
-    config['preauthorized'],
-    auto_hash = False
-)
+    config['preauthorized'])
 
 name, authentication_status, username = authenticator.login('Login', 'main')
 
