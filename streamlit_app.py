@@ -117,22 +117,22 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 # Streamlit file uploader
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
-token = st.text_input(
+token_input = st.text_input(
         "Placeholder for the other text input widget",
         "This is a placeholder",
         key="placeholder",
         )
 
 #token = token_result["token"]  # Replace "token_column_name" with the actual column name you need
-token_1 = token_result[0].get("token")  # Safely get the token if present
-st.write(token_1)# File name in cloud storage
+token_validation = token_result[0].get("token")  # Safely get the token if present
+#st.write(token_1)# File name in cloud storage
 
 if uploaded_file:
     destination_blob_name = uploaded_file.name
    #st.write("Navn på fil: ", uploaded_file.name);
 # Handle file upload when button is clicked
 if st.button("Upload fil"):
-    if token == rows["token"]:
+    if token_input == token_validation:
         # Call the upload_blob function with the file object
         upload_blob("vertex_search_assets", uploaded_file, destination_blob_name)
     else:
