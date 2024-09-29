@@ -5,17 +5,30 @@ import pytz
 from datetime import datetime
 import streamlit_authenticator as stauth
 
+# Access the credentials directly from the secrets
+names = st.secrets["credentials"]["names"]
+usernames = st.secrets["credentials"]["usernames"]
+passwords = st.secrets["credentials"]["passwords"]
 
+# Hash the passwords
+hashed_passwords = stauth.Hasher(passwords).generate()
 
-hashed_passwords = stauth.Hasher(st.secrets["credentials"]["passwords"]).generate()
-authenticator = stauth.Authenticate(st.secrets["credentials"]["names"], st.secrets["credentials"]["usernames"], hashed_passwords,
-    'some_cookie_name', 'some_signature_key', cookie_expiry_days=30)
+# Authenticate using the credentials
+authenticator = stauth.Authenticate(
+    names, 
+    usernames, 
+    hashed_passwords, 
+    'some_cookie_name', 
+    'some_signature_key', 
+    cookie_expiry_days=30
+)
 
 name, authentication_status, username = authenticator.login('Login', 'main')
 
+# Handle authentication status
 if st.session_state['authentication_status']:
     authenticator.logout('Logout', 'main')
-    st.write('Welcome *%s*' % (st.session_state['name']))
+    st.write(f"Welcome *{st.session_state['name']}*")
     st.title('Some content')
 elif st.session_state['authentication_status'] == False:
     st.error('Username/password is incorrect')
