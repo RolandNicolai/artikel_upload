@@ -5,8 +5,7 @@ import time
 import pytz
 from datetime import datetime
 
-LOGO_URL_LARGE = "https://bonnierpublications.com/app/themes/bonnierpublications/assets/img/logo.svg"
-st.logo(LOGO_URL_LARGE)
+
 def check_password():
     """Returns `True` if the user had a correct password."""
 
@@ -46,7 +45,8 @@ if not check_password():
 
 
 
-
+LOGO_URL_LARGE = "https://bonnierpublications.com/app/themes/bonnierpublications/assets/img/logo.svg"
+st.logo(LOGO_URL_LARGE)
 # Define the Copenhagen timezone
 copenhagen_tz = pytz.timezone('Europe/Copenhagen')
 
@@ -69,4 +69,4 @@ elif 12 <= current_hour < 18:
     st.title(":orange[God eftermiddag] " + first_name.capitalize())
 else:
     st.title(":orange[Godaften] " + first_name.capitalize())
-# Main Streamlit app starts here
+
