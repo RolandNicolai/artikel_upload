@@ -1,2 +1,2 @@
 streamlit
-pip install streamlit-authenticator
+streamlit-authenticator
