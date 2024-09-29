@@ -65,11 +65,11 @@ else:
     first_name = ""
 # Conditional statements based on the time of the day
 if 6 <= current_hour < 10:
-    st.title(":orange[Godmorgen] " + st.secrets["passwords"])
+    st.title(":orange[Godmorgen] " + st.secrets["username"])
 elif 10<= current_hour < 12:
-    st.title(":orange[God formiddag] " + st.secrets["passwords"])
+    st.title(":orange[God formiddag] " + st.secrets["username"])
 elif 12 <= current_hour < 18:
-    st.title(":orange[God eftermiddag] " + st.secrets["passwords"])
+    st.title(":orange[God eftermiddag] " + st.secrets["username"])
 else:
     st.title(":orange[Godaften] " + first_name.capitalize())
 
