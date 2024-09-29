@@ -77,7 +77,7 @@ else:
 
 # Setup Google Cloud credentials
 credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["vertexAI_service_account"]
+    st.secrets["service_account"]
 )
 
 def upload_blob(bucket_name, file_obj, destination_blob_name):
