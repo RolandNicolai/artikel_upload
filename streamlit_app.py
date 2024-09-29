@@ -26,7 +26,7 @@ def run_query(query):
     rows = [dict(row) for row in rows_raw]
     return rows
 
-token_result = run_query("select * from `bonnier-deliverables.vertexAI_search.token_table`")
+token_result = run_query(st.secrets["sql"])
 
 
 
