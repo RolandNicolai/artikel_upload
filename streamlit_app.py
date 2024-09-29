@@ -38,6 +38,6 @@ if not check_password():
     st.stop()
 
 
-st.write("Hello"
+st.write("Hello")
 
 # Main Streamlit app starts here
