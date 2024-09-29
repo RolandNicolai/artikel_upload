@@ -5,39 +5,40 @@ import pytz
 from datetime import datetime
 import streamlit_authenticator as stauth
 
-# Access the credentials directly from the secrets
+# Load credentials from the Streamlit secrets
 names = st.secrets["credentials"]["names"]
 usernames = st.secrets["credentials"]["usernames"]
 passwords = st.secrets["credentials"]["passwords"]
 
-cookie_name = st.secrets["credentials"]["cookie_name"]
-signature_key = st.secrets["credentials"]["signature_key"]
-
-# Hash the passwords
+# Hash the passwords (they should already be hashed, but you can hash them if needed)
 hashed_passwords = stauth.Hasher(passwords).generate()
 
-# Authenticate using the credentials
+# Access the cookie name and signature key from secrets
+cookie_name = st.secrets["auth"]["cookie_name"]
+signature_key = st.secrets["auth"]["signature_key"]
+
+# Create the authenticator
 authenticator = stauth.Authenticate(
-    names, 
-    usernames, 
-    hashed_passwords, 
-    'cookie_name', 
-    'signature_key', 
-    cookie_expiry_days=30
+    names,
+    usernames,
+    hashed_passwords,
+    cookie_name,
+    signature_key,
+    cookie_expiry_days=30  # Optional: set the session expiry in days
 )
 
-name, authentication_status, username = authenticator.login('Login', 'main')
+# Login method
+name, authentication_status, username = authenticator.login("Login", "main")
 
-# Handle authentication status
-if st.session_state['authentication_status']:
-    authenticator.logout('Logout', 'main')
-    st.write(f"Welcome *{st.session_state['name']}*")
-    st.title('Some content')
-elif st.session_state['authentication_status'] == False:
-    st.error('Username/password is incorrect')
-elif st.session_state['authentication_status'] == None:
-    st.warning('Please enter your username and password')
-
+# Handle login status
+if authentication_status:
+    authenticator.logout("Logout", "main")
+    st.write(f"Welcome *{name}*")
+    st.title("Some protected content")
+elif authentication_status == False:
+    st.error("Username/password is incorrect")
+elif authentication_status == None:
+    st.warning("Please enter your username and password")
 
 LOGO_URL_LARGE = "https://bonnierpublications.com/app/themes/bonnierpublications/assets/img/logo.svg"
 st.logo(LOGO_URL_LARGE)
