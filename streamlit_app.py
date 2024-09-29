@@ -94,13 +94,14 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 # Streamlit file uploader
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
-title = st.text_input({uploaded_file})
-st.write("The current movie title is", title)
+
 
 # File name in cloud storage
 
 if uploaded_file:
    st.write("Filename: ", uploaded_file.name)
+    title = st.text_input({uploaded_file.name})
+    st.write("The current movie title is", title)
 # Handle file upload when button is clicked
 if st.button("Upload fil"):
     if uploaded_file is not None:
