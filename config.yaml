@@ -3,7 +3,7 @@ credentials:
     jsmith:
       email: jsmith@gmail.com
       name: John Smith
-      password: '$2b$12$oXXVFoI3DdE2orwaX5eAf.e9hVvfSPE28weYWQcDCmn6OQ6tFS0Uq' # To be replaced with hashed password
+      password: $2b$12$oXXVFoI3DdE2orwaX5eAf.e9hVvfSPE28weYWQcDCmn6OQ6tFS0Uq # To be replaced with hashed password
 # To be replaced with hashed password
 cookie:
   expiry_days: 30
