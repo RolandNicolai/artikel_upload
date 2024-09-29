@@ -119,7 +119,7 @@ uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
 token_input = st.text_input(
         "Indsæt Token",
-        "",
+        "Indsæt unik token her",
         key="placeholder",
         )
 
