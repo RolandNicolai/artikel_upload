@@ -118,8 +118,8 @@ def upload_blob(bucket_name, file_obj, destination_blob_name):
 uploaded_file = st.file_uploader("Vælg en PDF fil", type="pdf")
 
 token_input = st.text_input(
-        "Placeholder for the other text input widget",
-        "This is a placeholder",
+        "Indsæt Token",
+        "",
         key="placeholder",
         )
 
