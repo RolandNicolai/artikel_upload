@@ -5,11 +5,11 @@ import pytz
 from datetime import datetime
 import streamlit_authenticator as stauth
 import yaml
+from yaml.loader import SafeLoader
 
 hashed_passwords = stauth.Hasher(['abc', 'def']).generate()
 
 st.write({hashed_passwords})
-from yaml.loader import SafeLoader
 with open('config.yaml') as file:
     config = yaml.load(file, Loader=SafeLoader)
 
