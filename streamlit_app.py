@@ -124,7 +124,7 @@ token = st.text_input(
         )
 
 #token = token_result["token"]  # Replace "token_column_name" with the actual column name you need
-token_1 = token_result[0].get("token_column_name")  # Safely get the token if present
+token_1 = token_result[0].get("token")  # Safely get the token if present
 st.write(token_1)# File name in cloud storage
 
 if uploaded_file:
