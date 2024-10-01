@@ -44,7 +44,7 @@ if token_result and len(token_result) > 0:
     else:
         st.error("No token found.")
 else:
-    st.error("No valid token found.")
+    st.error("Ingen valid token fundet. prøv at genstarte app")
 
 
 def check_password():
