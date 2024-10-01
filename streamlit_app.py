@@ -139,21 +139,24 @@ token_input = st.text_input(
         "Indsæt unik token her",
         key="placeholder",
         )
+hashed_user_input_token = hash_token(token_input)
+
 
 #token = token_result["token"]  # Replace "token_column_name" with the actual column name you need
-token_validation = token_result[0].get("token")  # Safely get the token if present
+#token_validation = token_result[0].get("token")  # Safely get the token if present
 #st.write(token_1)# File name in cloud storage
 url = "https://lookerstudio.google.com/reporting/3c89f773-ad20-4558-b4f3-87249413c0f7"
 st.markdown("Hent token [link](%s)" % url)
 
-if uploaded_file:
-    destination_blob_name = uploaded_file.name
-   #st.write("Navn på fil: ", uploaded_file.name);
-# Handle file upload when button is clicked
+# Check if both conditions are met (file uploaded and valid token input)
 if st.button("Upload fil"):
-    if token_input == token_validation:
+    if uploaded_file and hashed_user_input_token == hashed_token:
+        destination_blob_name = uploaded_file.name
         # Call the upload_blob function with the file object
         upload_blob("vertex_search_assets", uploaded_file, destination_blob_name)
+        st.success("File uploaded successfully!")
     else:
-        st.error("Ingen fil valgt, vælg venligst en fil.")
-
+        if not uploaded_file:
+            st.error("Ingen fil valgt, vælg venligst en fil.")
+        if hashed_user_input_token != hashed_token:
+            st.error("Token er ugyldig, venligst indtast en gyldig token.")
