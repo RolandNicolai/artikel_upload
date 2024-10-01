@@ -9,6 +9,8 @@ from google.cloud import storage
 import streamlit as st
 from google.oauth2 import service_account
 from google.cloud import bigquery
+import hashlib
+
 
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
@@ -16,9 +18,13 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 client = bigquery.Client(credentials=credentials)
 
+def hash_token(token):
+    """Returns the SHA-256 hash of the token."""
+    return hashlib.sha256(token.encode()).hexdigest()
+
 # Perform query.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
-@st.cache_data(ttl=600)
+#@st.cache_data(ttl=600)
 def run_query(query):
     query_job = client.query(query)
     rows_raw = query_job.result()
@@ -28,6 +34,17 @@ def run_query(query):
 
 token_result = run_query(st.secrets["sql"])
 
+# Safely extract only the token value
+if token_result and len(token_result) > 0:
+    # Extract the token and hash it
+    token = token_result[0].get("token")  # Assuming the token column is named "token"
+    
+    if token:
+        hashed_token = hash_token(token)  # Hash the token for validation
+    else:
+        st.error("No token found.")
+else:
+    st.error("No valid token found.")
 
 
 def check_password():
